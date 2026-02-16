@@ -47,6 +47,7 @@ const Spaceship = ({
   const rightThrusterRef = useRef();
   const antiGravRef = useRef();
   const boostFlareRef = useRef();
+  const rearPropellerRef = useRef();
 
   const speed = 0.12;
   const damping = 0.92;
@@ -223,6 +224,9 @@ const Spaceship = ({
     if (boostFlareRef.current) {
       boostFlareRef.current.scale.set(1, 1, 1 + Math.sin(t * 18) * 0.12);
     }
+    if (rearPropellerRef.current) {
+      rearPropellerRef.current.rotation.z += boostingRef.current ? 0.6 : 0.34;
+    }
   });
 
   const checkSectionProximity = (position, allSections, callback) => {
@@ -359,6 +363,28 @@ const Spaceship = ({
           </mesh>
           <pointLight position={[0, -0.04, 1.62]} intensity={1.85} color="#22d3ee" distance={14} decay={2} />
           <pointLight position={[0, 0.3, -0.46]} intensity={0.95} color="#67e8f9" distance={8} decay={2} />
+          <mesh position={[0, 0.08, 1.72]}>
+            <cylinderGeometry args={[0.05, 0.05, 0.18, 12]} />
+            <meshStandardMaterial color="#94a3b8" emissive="#334155" emissiveIntensity={0.28} metalness={0.62} roughness={0.3} />
+          </mesh>
+          <group ref={rearPropellerRef} position={[0, 0.2, 1.84]}>
+            <mesh>
+              <cylinderGeometry args={[0.045, 0.045, 0.12, 12]} />
+              <meshStandardMaterial color="#cbd5e1" metalness={0.72} roughness={0.26} />
+            </mesh>
+            <mesh>
+              <boxGeometry args={[0.92, 0.03, 0.11]} />
+              <meshStandardMaterial color="#67e8f9" emissive="#22d3ee" emissiveIntensity={0.35} metalness={0.42} roughness={0.28} />
+            </mesh>
+            <mesh rotation={[0, 0, Math.PI / 2]}>
+              <boxGeometry args={[0.92, 0.03, 0.11]} />
+              <meshStandardMaterial color="#67e8f9" emissive="#22d3ee" emissiveIntensity={0.35} metalness={0.42} roughness={0.28} />
+            </mesh>
+          </group>
+          <mesh position={[0, 0.2, 1.84]}>
+            <sphereGeometry args={[0.065, 12, 12]} />
+            <meshBasicMaterial color="#a5f3fc" transparent opacity={0.86} depthWrite={false} />
+          </mesh>
 
           <group ref={antiGravRef} position={[0, -0.63, 0]}>
             <mesh rotation={[-Math.PI / 2, 0, 0]}>
@@ -390,3 +416,4 @@ const Spaceship = ({
 };
 
 export default Spaceship;
+
