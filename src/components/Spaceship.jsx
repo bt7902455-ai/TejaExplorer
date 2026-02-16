@@ -225,7 +225,7 @@ const Spaceship = ({
       boostFlareRef.current.scale.set(1, 1, 1 + Math.sin(t * 18) * 0.12);
     }
     if (rearPropellerRef.current) {
-      rearPropellerRef.current.rotation.z += boostingRef.current ? 0.32 : 0.18;
+      rearPropellerRef.current.rotation.y += boostingRef.current ? 0.24 : 0.14;
     }
   });
 
@@ -363,11 +363,11 @@ const Spaceship = ({
           </mesh>
           <pointLight position={[0, -0.04, 1.62]} intensity={1.85} color="#22d3ee" distance={14} decay={2} />
           <pointLight position={[0, 0.3, -0.46]} intensity={0.95} color="#67e8f9" distance={8} decay={2} />
-          <mesh position={[0, -0.24, 1.72]}>
-            <cylinderGeometry args={[0.065, 0.065, 0.28, 12]} />
+          <mesh position={[0, 0.82, 1.06]}>
+            <cylinderGeometry args={[0.065, 0.065, 0.34, 12]} />
             <meshStandardMaterial color="#94a3b8" emissive="#334155" emissiveIntensity={0.28} metalness={0.62} roughness={0.3} />
           </mesh>
-          <group ref={rearPropellerRef} position={[0, -0.42, 1.86]}>
+          <group ref={rearPropellerRef} position={[0, 1.04, 1.12]}>
             <mesh>
               <cylinderGeometry args={[0.06, 0.06, 0.16, 12]} />
               <meshStandardMaterial color="#cbd5e1" metalness={0.72} roughness={0.26} />
@@ -376,12 +376,12 @@ const Spaceship = ({
               <boxGeometry args={[1.45, 0.05, 0.16]} />
               <meshStandardMaterial color="#67e8f9" emissive="#22d3ee" emissiveIntensity={0.35} metalness={0.42} roughness={0.28} />
             </mesh>
-            <mesh rotation={[0, 0, Math.PI / 2]}>
+            <mesh rotation={[0, Math.PI / 2, 0]}>
               <boxGeometry args={[1.45, 0.05, 0.16]} />
               <meshStandardMaterial color="#67e8f9" emissive="#22d3ee" emissiveIntensity={0.35} metalness={0.42} roughness={0.28} />
             </mesh>
           </group>
-          <mesh position={[0, -0.42, 1.86]}>
+          <mesh position={[0, 1.04, 1.12]}>
             <sphereGeometry args={[0.095, 12, 12]} />
             <meshBasicMaterial color="#a5f3fc" transparent opacity={0.86} depthWrite={false} />
           </mesh>
@@ -416,5 +416,6 @@ const Spaceship = ({
 };
 
 export default Spaceship;
+
 
 
